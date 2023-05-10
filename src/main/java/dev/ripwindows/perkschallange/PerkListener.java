@@ -32,8 +32,7 @@ public class PerkListener implements Listener {
 
     public ClickablePerk getPerk(ItemStack itemStack) {
         for (ClickablePerk perk : PerkManager.getInstance().getClickablePerks()) {
-            if (perk.item().getType() == itemStack.getType() &&
-                    perk.item().getItemMeta().equals(itemStack.getItemMeta()))
+            if (perk.item().isSimilar(itemStack))
                 return perk;
         }
         return null;
