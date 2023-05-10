@@ -3,41 +3,45 @@ package dev.ripwindows.perkschallange;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Predicate;
+
 /**
  * The interface Perk.
  *
  * @author <a href="https://github.com/ripwindows">ripwindows</a>
  */
 public interface Perk {
+
     /**
-     * Name string.
+     * Returns the name of the perk as a string.
      *
-     * @return the string
+     * @return the name of the perk.
      */
     @NotNull String name();
 
     /**
-     * Requirements boolean.
+     * Returns a Predicate that determines whether the given player
+     * meets the requirements for the perk.
      *
-     * @param player the player
-     * @return the boolean
+     * @return a Predicate that tests whether the player meets the requirements.
      */
-    boolean requirements(@NotNull Player player);
+    Predicate<Player> requirements();
 
     /**
-     * Execute.
+     * Executes the actions associated with the perk for the given player.
      *
-     * @param player the player
+     * @param player the player on which to execute the perk.
      */
     void execute(@NotNull Player player);
+
     /**
-     * Apply.
+     * Applies the perk to the given player, if they meet the requirements.
      *
-     * @param player the player
+     * @param player the player to apply the perk to.
      */
     default void apply(@NotNull Player player) {
-        if (!requirements(player))
+        if (requirements().test(player)) {
             execute(player);
+        }
     }
-
 }
