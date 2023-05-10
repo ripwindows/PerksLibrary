@@ -16,8 +16,8 @@ import java.util.HashMap;
 public final class PerkManager {
     private @Getter
     @Nullable Plugin plugin;
-    private static HashMap<String, Perk> perks;
-    private static HashMap<String, ClickablePerk> clickablePerks;
+    private HashMap<String, Perk> perks;
+    private HashMap<String, ClickablePerk> clickablePerks;
     private @Getter static PerkManager instance;
 
     /**
